@@ -576,9 +576,9 @@ def account_request(
 	if stripe_setup:
 		frappe.set_user("Administrator")
 		stripe.api_key = get_decrypted_password(
-			"Stripe Settings",
-			frappe.db.get_single_value("Press Settings", "stripe_account"),
-			"secret_key",
+			"Press Settings",
+			"Press Settings",
+			"stripe_secret_key",
 			raise_exception=False,
 		)
 		customer_id = create_team(account_request, get_stripe_id=True)
@@ -653,6 +653,9 @@ def check_subdomain_availability(subdomain, app):
 	Checks if subdomain is available to create a new site
 	"""
 	# Only for ERPNext domains
+
+	if len(subdomain) <= 4:
+		return False
 
 	erpnext_com = get_erpnext_com_connection()
 	result = erpnext_com.post_api(
