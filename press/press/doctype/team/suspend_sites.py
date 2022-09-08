@@ -21,7 +21,7 @@ from frappe.utils.data import flt
 
 
 def execute():
-	teams_with_total_usage = get_teams_with_total_usage()
+	teams_with_total_usage = get_teams_with_total_usage() 
 
 	for d in teams_with_total_usage:
 		total_usage = d.total_usage
@@ -45,10 +45,10 @@ def suspend_sites_and_send_email(team):
 		account_update_link = frappe.utils.get_url("/dashboard/welcome")
 		frappe.sendmail(
 			recipients=email,
-			subject="Your sites have been suspended on Frappe Cloud",
+			subject="Your sites have been suspended on Lonius Cloud",
 			template="payment_failed",
 			args={
-				"subject": "Your sites have been suspended on Frappe Cloud",
+				"subject": "Your sites have been suspended on Lonius Cloud",
 				"account_update_link": account_update_link,
 				"card_not_added": True,
 				"sites": sites,
